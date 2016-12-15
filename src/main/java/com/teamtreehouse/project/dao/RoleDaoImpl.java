@@ -18,6 +18,7 @@ public class RoleDaoImpl implements RoleDao {
   SessionFactory sessionFactory;
 
   @Override
+  @SuppressWarnings("unchecked")
   public List<Role> listAllRoles() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
