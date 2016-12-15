@@ -20,7 +20,6 @@ public class ProjectController {
   public String listAllProjects(Model model){
     //TODO : MASK : Get all Projects
     List<Project> projectList = new ArrayList<>();
-
     model.addAttribute("projects",projectList);
     return "project/index";
   }
