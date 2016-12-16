@@ -26,17 +26,18 @@ public class RoleController {
   public String listRoles(Model model) {
     // TODO : MASK : Get All Roles
     List<Role> roleList = roleService.listAllRoles();
-    model.addAttribute("roles",roleList);
+    model.addAttribute("newrole",new Role()); // Object Binding for New Role Added by User
+    model.addAttribute("roles",roleList);  // List existing roles from Database
     return "role/roles";
   }
 
   // Add Role
   @RequestMapping(value = "/roles",method = RequestMethod.POST)
-  public String addRoles() {
+  public String addRoles(Role role) {
     // TODO: MASK : Add Roles if Valid Data is Received
-
+    roleService.save(role);
     // TODO: MASK : Return Redirect /roles
-    return null;
+    return "redirect:/roles";
   }
 
   //Form to Edit Role

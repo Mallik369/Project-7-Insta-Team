@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <title>InstaTeam</title>
         <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/normalize.css" />
-        <link rel="stylesheet" href="/css/site.css" />
+        <link rel="stylesheet" th:href="@{/normalize.css}" />
+        <link rel="stylesheet" th:href="@{/site.css}" />
     </head>
     <body>
         <header>
@@ -27,7 +27,7 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form>
+                <form th:action ="@{/roles}" method="post" th:object = "${newrole}">
                     <h2>Manage Roles</h2>
                     <div th:each = "role : ${roles}">
                         <ul class="checkbox-list">
@@ -35,8 +35,8 @@
                         </ul>
                     </div>
                     <div class="actions add-new-role">
-                        <input type="text" placeholder="New Role..." />
-                        <a class="button" th:href="@{/roles}">Add</a>
+                        <input th:field = "*{name}" type="text" placeholder="New Role..." />
+                        <button type="submit" class="button">Add</button>
                     </div>
                 </form>
             </div>
