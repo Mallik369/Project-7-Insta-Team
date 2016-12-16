@@ -33,7 +33,13 @@ public class RoleDaoImpl implements RoleDao {
   }
 
   @Override
-  public void save(Role role) {}
+  public void save(Role role) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    session.saveOrUpdate(role);
+    session.getTransaction().commit();
+    session.close();
+  }
 
   @Override
   public void delete(Role role) {}
