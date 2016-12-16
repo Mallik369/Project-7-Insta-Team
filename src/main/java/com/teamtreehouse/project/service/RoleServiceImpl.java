@@ -28,12 +28,8 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Override
-  public Void Save(Role role) {
-    return null;
-  }
+  public void save(Role role) {}
 
   @Override
-  public Void Delete(Role role) {
-    return null;
-  }
+  public void delete(Role role) {}
 }

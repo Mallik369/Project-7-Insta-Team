@@ -10,6 +10,6 @@ import java.util.List;
 public interface RoleService {
   List<Role> listAllRoles();   // To provide all Roles to Controller
   Role findRoleById(Long id);  // To provide a single Role to Controller based on its id
-  Void Save(Role role);        // To Save a Role provided by Controller
-  Void Delete(Role role);      // To Delete a Role provided by Controller
+  void save(Role role);        // To Save a Role provided by Controller
+  void delete(Role role);      // To Delete a Role provided by Controller
 }
