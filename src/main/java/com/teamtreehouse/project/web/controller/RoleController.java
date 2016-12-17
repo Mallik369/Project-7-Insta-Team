@@ -5,12 +5,14 @@ import com.teamtreehouse.project.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 
 /**
  * Created by Mallikarjuna on 12/8/2016.
@@ -33,8 +35,13 @@ public class RoleController {
 
   // Add Role
   @RequestMapping(value = "/roles",method = RequestMethod.POST)
-  public String addRoles(Role role) {
+  public String addRoles(@Valid Role role, BindingResult result) {
     // TODO: MASK : Add Roles if Valid Data is Received
+
+    if(result.hasErrors()) {
+      // Redirect Roles Page on receiving Invalid Role Data
+      return "redirect:/roles";
+    }
     roleService.save(role);
     // TODO: MASK : Return Redirect /roles
     return "redirect:/roles";
