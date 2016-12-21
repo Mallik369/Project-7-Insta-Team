@@ -17,8 +17,8 @@ public class Role {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
-  @Pattern(regexp = "^[A-Za-z]+(\\d*)?[ ]*\\w*[ ]*\\w*")
+  @NotNull(message = "{role.name.notnull}")
+  @Pattern(regexp = "^[A-Za-z]+(\\d*)?[ ]*\\w*[ ]*\\w*" , message = "{role.name.pattern}")
   private String name;
 
   public Role() {}
