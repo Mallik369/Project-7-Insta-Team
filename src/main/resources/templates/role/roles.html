@@ -27,6 +27,10 @@
         </nav>
         <section>
             <div class="container wrapper">
+                <div class="flash" th:if="${flash}"
+                     th:classappend="${#strings.toLowerCase(flash.status)}"
+                     th:utext="${flash.message}">
+                </div>
                 <form th:action ="@{/roles}" method="post" th:object = "${role}">
                     <h2>Manage Roles</h2>
                     <div th:each = "role : ${roles}">
@@ -38,6 +42,13 @@
                         <input th:field = "*{name}" type="text" placeholder="New Role..." />
                         <button type="submit" class="button">Add</button>
                     </div>
+                    <div class="flash error-message" style="margin-left: 10px" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    <h3>Instructions for Adding New Role</h3>
+                    <h6>1.Empty Values and Special Characters are not Allowed.</h6>
+                    <h6>2.Starting with digits are not Allowed.</h6>
+                    <h6>3.Duplication is not Allowed.</h6>
+                    <h6>4.Accepted Role Name : Java Developer , Java J2EE Developer</h6>
+                    <h6>5.UnAccepted Role Name : 123Developer , Developer@#$</h6>
                 </form>
             </div>
         </section>
