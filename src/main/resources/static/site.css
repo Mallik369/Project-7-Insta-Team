@@ -410,6 +410,33 @@ form .add-new-collaborator .button {
 	margin: 0;
 }
 
+/* Form validation messages*/
+
+.flash {
+  color : white;
+  text-align: center;
+  width: 80%;
+   margin: 1% 0 5% 5%;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.error-message {
+  background: #cc0000;
+  margin: -3% auto 3% auto;
+  width: 90%;
+}
+
+.success {
+  background: #00cc00;
+
+}
+.failure {
+  background: #cc0000;
+  }
+
+
+
 
 
 
