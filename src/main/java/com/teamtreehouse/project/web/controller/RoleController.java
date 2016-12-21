@@ -2,6 +2,7 @@ package com.teamtreehouse.project.web.controller;
 
 import com.teamtreehouse.project.model.Role;
 import com.teamtreehouse.project.service.RoleService;
+import com.teamtreehouse.project.web.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,15 +43,30 @@ public class RoleController {
     // TODO: MASK : Add Roles if Valid Data is Received
 
     if(result.hasErrors()) {
+
+      // Include Validation Error Messages
+      redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.role",result);
       // Include the Entered Data upon Receiving Invalid Role Data
       redirectAttributes.addFlashAttribute("role",role);
       // Redirect Roles Page on receiving Invalid Role Data
       return "redirect:/roles";
     }
+    // Duplicate Roles are not Allowed to add to Database
+    if (roleService.listAllRoles().stream().anyMatch(rolee -> rolee.getName().equals(role.getName()))) {
+      FlashMessage message =
+          new FlashMessage(String.format("'%s Role is available in database", role.getName()),
+              FlashMessage.Status.FAILURE);
+      redirectAttributes.addFlashAttribute("flash", message);
+      return "redirect:/roles";
+    }
     roleService.save(role);
+    // Include Flash Message for Role Name to add Database
+    redirectAttributes.addFlashAttribute("flash",new FlashMessage("Role is added Successfully",
+        FlashMessage.Status.SUCCESS));
     // TODO: MASK : Return Redirect /roles
     return "redirect:/roles";
   }
+
 
   //Form to Edit Role
   @RequestMapping(value = "/roles/{roleId}/edit")
