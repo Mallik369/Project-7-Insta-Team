@@ -12,4 +12,5 @@ public interface RoleService {
   Role findRoleById(Long id);  // To provide a single Role to Controller based on its id
   void save(Role role);        // To Save a Role provided by Controller
   void delete(Role role);      // To Delete a Role provided by Controller
+
 }
