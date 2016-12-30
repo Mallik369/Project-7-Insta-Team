@@ -2,6 +2,7 @@ package com.teamtreehouse.project.dao;
 
 import com.teamtreehouse.project.model.Role;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Repository
 public class RoleDaoImpl implements RoleDao {
+
   @Autowired
   SessionFactory sessionFactory;
 
@@ -32,6 +34,7 @@ public class RoleDaoImpl implements RoleDao {
     return null;
   }
 
+
   @Override
   public void save(Role role) {
     Session session = sessionFactory.openSession();
@@ -43,4 +46,5 @@ public class RoleDaoImpl implements RoleDao {
 
   @Override
   public void delete(Role role) {}
+
 }
