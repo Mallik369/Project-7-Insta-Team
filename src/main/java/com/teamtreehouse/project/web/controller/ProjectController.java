@@ -1,6 +1,10 @@
 package com.teamtreehouse.project.web.controller;
 
 import com.teamtreehouse.project.model.Project;
+import com.teamtreehouse.project.model.Role;
+import com.teamtreehouse.project.service.ProjectService;
+import com.teamtreehouse.project.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mallikarjuna on 12/8/2016.
@@ -16,10 +21,16 @@ import java.util.List;
 @Controller
 public class ProjectController {
 
+  @Autowired
+  ProjectService projectService;
+
+  @Autowired
+  RoleService roleService;
+
   @RequestMapping("/")
   public String listAllProjects(Model model){
     //TODO : MASK : Get all Projects
-    List<Project> projectList = new ArrayList<>();
+    List<Project> projectList = projectService.listAllProjects();
     model.addAttribute("projects",projectList);
     return "project/index";
   }
@@ -46,13 +57,12 @@ public class ProjectController {
   @RequestMapping("/project/{projectId}/edit")
   public String formEditProject(Model model) {
     // TODO : MASK : Add Model Attributes to Edit Form
-
     return "project/edit_project";
   }
 
   // Add Project
-  @RequestMapping(value = "/project/add", method = RequestMethod.POST)
-  public String addProject() {
+  @RequestMapping(value = "/project", method = RequestMethod.POST)
+  public String addProject(Project project) {
     // TODO : MASK : Add project if it is Valid
 
     // TODO : MASK : Return to /Project/{projectId}
