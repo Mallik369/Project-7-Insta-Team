@@ -39,8 +39,7 @@ public class ProjectController {
   @RequestMapping("/project/{projectId}")
   public String project(@PathVariable Long projectId, Model model) {
     // TODO: MASK : Get the Project by its Id
-    Project project = null;
-
+    Project project = projectService.findProjectById(projectId);
     model.addAttribute("project",project);
     return "project/project_detail";
   }
@@ -49,7 +48,8 @@ public class ProjectController {
   @RequestMapping("/newproject")
   public String formNewProject(Model model) {
     // TODO : MASK : Add Model Attributes to New Form
-
+    model.addAttribute("project",new Project());
+    model.addAttribute("roles",roleService.listAllRoles());
     return "project/edit_project";
   }
 
@@ -61,12 +61,13 @@ public class ProjectController {
   }
 
   // Add Project
-  @RequestMapping(value = "/project", method = RequestMethod.POST)
+  @RequestMapping(value = "/projects", method = RequestMethod.POST)
   public String addProject(Project project) {
     // TODO : MASK : Add project if it is Valid
+    projectService.save(project);
 
     // TODO : MASK : Return to /Project/{projectId}
-    return null;
+    return String.format("redirect:/Project/%s",project.getId());
   }
 
   // Update Project

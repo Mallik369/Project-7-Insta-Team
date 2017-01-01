@@ -26,11 +26,20 @@ public class ProjectDaoImpl implements ProjectDao {
 
   @Override
   public Project findProjectById(Long id) {
-    return null;
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    Project project = session.get(Project.class,id);
+    session.close();
+    return project;
   }
 
   @Override
   public void save(Project project) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    session.saveOrUpdate(project);
+    session.getTransaction().commit();
+    session.close();
   }
 
   @Override
