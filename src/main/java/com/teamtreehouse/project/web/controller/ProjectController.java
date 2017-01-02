@@ -64,6 +64,11 @@ public class ProjectController {
   @RequestMapping(value = "/projects", method = RequestMethod.POST)
   public String addProject(Project project) {
     // TODO : MASK : Add project if it is Valid
+
+    List<Role> roles = new ArrayList<>();
+    roles.addAll(project.getRolesNeeded().stream().filter(role -> role.getName() != null)
+      .map(role -> roleService.findByName(role.getName())).collect(Collectors.toList()));
+    project.setRolesNeeded(roles);
     projectService.save(project);
 
     // TODO : MASK : Return to /Project/{projectId}
