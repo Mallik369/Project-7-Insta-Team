@@ -30,8 +30,8 @@
     <div class="container wrapper">
         <form th:action="@{/projects}" method="post" th:object="${project}">
             <div>
-                <label> Project Name:</label>
-                <input type="text"  th:field ="*{name}" name="project_name"/>
+                <label for="project_name"> Project Name:</label>
+                <input type="text"  id="project_name" th:field ="*{name}" name="project_name"/>
             </div>
             <div>
                 <label for="project_description">Project Description:</label>
