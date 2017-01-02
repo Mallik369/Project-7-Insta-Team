@@ -3,6 +3,7 @@ package com.teamtreehouse.project.service;
 import com.teamtreehouse.project.dao.RoleDao;
 import com.teamtreehouse.project.model.Role;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public Role findRoleById(Long id) {
-    return null;
+    return roleDao.findRoleById(id);
   }
 
   @Override
@@ -34,4 +35,9 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public void delete(Role role) {}
+
+  @Override
+  public Role findByName(String name) {
+    return roleDao.findByName(name);
+  }
 }
