@@ -12,4 +12,5 @@ public interface RoleDao {
   Role findRoleById(Long id);  // To Read Single Role by its Id in Database
   void save(Role role);        // To Add a Single Role to Database
   void delete(Role role);      // To Delete Single Role from Database
+  Role findByName(String name);
 }

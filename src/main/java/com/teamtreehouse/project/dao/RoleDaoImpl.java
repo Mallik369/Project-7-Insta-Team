@@ -31,7 +31,11 @@ public class RoleDaoImpl implements RoleDao {
 
   @Override
   public Role findRoleById(Long id) {
-    return null;
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    Role role = session.get(Role.class,id);
+    session.close();
+    return role;
   }
 
 
@@ -46,5 +50,13 @@ public class RoleDaoImpl implements RoleDao {
 
   @Override
   public void delete(Role role) {}
+
+  @Override
+  public Role findByName(String name) {
+    Session session = sessionFactory.openSession();
+    Query query = session.createQuery("from Role where name=:name");
+    query.setParameter("name", name);
+    return (Role) query.uniqueResult();
+  }
 
 }
