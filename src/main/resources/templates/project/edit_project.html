@@ -32,10 +32,14 @@
             <div>
                 <label for="project_name"> Project Name:</label>
                 <input type="text"  id="project_name" th:field ="*{name}" name="project_name"/>
+                <div class="flash error-message" style="margin-left: 10px"
+                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             <div>
                 <label for="project_description">Project Description:</label>
                 <textarea rows="4" id="project_description" th:field = "*{description}" name="project_description"></textarea>
+                <div class="flash error-message" style="margin-left: 10px"
+                     th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
             <div>
                 <label for="project_status">Project Status:</label>
@@ -44,7 +48,7 @@
                     <select id="project_status" name="project_status" th:field="*{status}">
                         <option th:value="${T(com.teamtreehouse.project.model.Project.Status).Active}">Active</option>
                         <option th:value="${T(com.teamtreehouse.project.model.Project.Status).Archived}">Archived</option>
-                        <option th:value="${T(com.teamtreehouse.project.model.Project.Status).NotStarted}">Not Started</option>
+                        <option th:value="${T(com.teamtreehouse.project.model.Project.Status).Pending}">Pending</option>
                     </select>
                 </div>
             </div>
@@ -57,6 +61,8 @@
                         <label class="primary" th:for = "|project_roles${role.id}|"  th:text="${role.name}" style="display:inline"> Role Name</label>
                     </li>
                 </ul>
+                <div class="flash error-message" style="margin-top: 3%"
+                     th:if="${#fields.hasErrors('rolesNeeded')}" th:errors="*{rolesNeeded}"></div>
             </div>
             <div class="actions">
                 <input type="submit" value="Save" class="button"/>
