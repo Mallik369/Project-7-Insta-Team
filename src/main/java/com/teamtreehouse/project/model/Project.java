@@ -1,5 +1,7 @@
 package com.teamtreehouse.project.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -8,20 +10,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Mallikarjuna on 12/8/2016.
  */
 @Entity
 public class Project {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @NotNull
+  @Size(min = 3 , max = 30 ,message = "{project.name.size}")
   private String name;
+
+  @NotEmpty(message = "{project.description.notempty}")
+  @Size(max = 250)
   private String description;
+
   private Status status;
+
+  @NotNull(message = "{project.rolesNeeded.notnull}")
   @ManyToMany
   private List<Role> rolesNeeded = new ArrayList<>();
+
   @ManyToMany
   private List<Collaborator> collaborators = new ArrayList<>();
 
@@ -54,7 +69,7 @@ public class Project {
   public Status getStatus() {return status;}
 
   public enum Status {
-    Active, Archived, NotStarted
+    Active, Archived, Pending
   }
 
 }
