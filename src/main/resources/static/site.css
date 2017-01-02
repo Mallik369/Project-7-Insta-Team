@@ -184,11 +184,14 @@ strong {
 	border-radius: 20px;
 	font-weight: 700;
 }
-.tag.active {
-	background: #72c38d;
+.tag.active{
+     background: #72c38d;
 }
-.tag.archived {
-	background: #bbbab9;
+.tag.archived{
+     background: #bbbab9;
+}
+.tag.pending{
+     background: #c37474;
 }
 .list-item {
 	border-top: 1px solid #e1e0e0;
